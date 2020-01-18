@@ -13,7 +13,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: docker build
       run: docker build -t this -f .circleci/Dockerfile .circleci/
-    - name: docker run
+    - name: jb install && make && zip
       run: |
         docker run -v $PWD:/go/src/github.com/kubernetes-monitoring/kubernetes-mixin:rw this /bin/sh -c "jb install && make"
         zip kubernetes-monitoring-mixin.zip prometheus_alerts.yaml prometheus_rules.yaml lib/dashboards.jsonnet dashboards_out/
